@@ -6,6 +6,7 @@ import Input from "../../../components/UI/Input/Input";
 import { useNavigate } from "react-router-dom";
 
 import "./ContactData.css";
+import { connect } from "react-redux";
 
 const ContactData = (props) => {
     const orderForm = {
@@ -80,7 +81,7 @@ const ContactData = (props) => {
                 ],
             },
             value: "fastest",
-            validation: {},
+            // validation: {},
             valid: false,
         },
     };
@@ -98,8 +99,8 @@ const ContactData = (props) => {
             data[formElementIdentifier] = formData[formElementIdentifier].value;
         }
         const order = {
-            ingredients: props.ingredients,
-            price: props.totalPrice,
+            ingredients: props.ings,
+            price: props.price,
             orderData: data,
         };
         axios
@@ -197,4 +198,11 @@ const ContactData = (props) => {
     );
 };
 
-export default ContactData;
+const mapStateToProps = (state) => {
+    return {
+        ings: state.ingredients,
+        price: state.totalPrice,
+    };
+}
+
+export default connect(mapStateToProps)(ContactData);
