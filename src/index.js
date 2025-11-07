@@ -6,10 +6,15 @@ import reportWebVitals from './reportWebVitals';
 import { BrowserRouter } from 'react-router-dom';
 import { Provider } from 'react-redux';
 import { configureStore } from '@reduxjs/toolkit';
-import reducer from './store/reducer';
+import burgerBuilderReducer from './store/reducers/burgerBuilder';
+import orderReducer from './store/reducers/order';
 
 const store = configureStore({
-  reducer
+  reducer: {
+    burgerBuilder: burgerBuilderReducer,
+    order: orderReducer
+  },
+  middleware: (getDefaultMiddleware) => getDefaultMiddleware({ serializableCheck: true }),
 });
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(

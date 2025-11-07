@@ -6,7 +6,7 @@ import './NavigationItems.css';
 const navigationItems = (props) => (
     <ul className="NavigationItems">
         <NavigationItem link="/" exact>Burger Builder</NavigationItem>
-        <NavigationItem link="/orders" exact>Checkout</NavigationItem>
+        <NavigationItem link="/orders" exact>Orders</NavigationItem>
     </ul>
 );
 

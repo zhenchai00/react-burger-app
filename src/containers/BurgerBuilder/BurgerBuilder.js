@@ -8,23 +8,18 @@ import withErrorHandler from "../../components/hoc/withErrorHandler/withErrorHan
 import axios from "../../axios-order";
 import { useNavigate } from "react-router-dom";
 import { connect } from "react-redux";
-import * as actionTypes from "../../store/actions";
-
-const INGREDIENT_PRICES = {
-    salad: 0.5,
-    cheese: 0.4,
-    meat: 1.3,
-    bacon: 0.7,
-};
+import * as burgerBuilderActions from "../../store/actions/index";
 
 const BurgerBuilder = (props) => {
     const [purchasable, setPurchasable] = useState(false);
     const [purchasing, setPurchasing] = useState(false);
-    const [loading, setLoading] = useState(false);
-    const [error, setError] = useState(false);
     let navigate = useNavigate();
 
     const updatePurchaseState = (ingredients) => {
+        if (!ingredients) {
+            setPurchasable(false);
+            return;
+        }
         const sum = Object.keys(ingredients)
             .map((igKey) => {
                 return ingredients[igKey];
@@ -44,6 +39,7 @@ const BurgerBuilder = (props) => {
     };
 
     const purchaseContinueHandler = () => {
+        props.onInitPurchase();
         navigate({ pathname: "/checkout" });
     };
 
@@ -51,7 +47,11 @@ const BurgerBuilder = (props) => {
         // keep purchasable state in sync with ingredients
         updatePurchaseState(props.ings);
     }, [props.ings]);
-    
+
+    useEffect(() => {
+        props.onInitIngredients();
+    }, [props.onInitIngredients]);
+
     const disabledInfo = props.ings ? { ...props.ings } : {};
     for (let key in disabledInfo) {
         disabledInfo[key] = disabledInfo[key] <= 0;
@@ -60,20 +60,16 @@ const BurgerBuilder = (props) => {
         <>
             <Modal show={purchasing} modelClosed={purchaseCancelHandler}>
                 {props.ings ? (
-                    loading ? (
-                        <Spinner />
-                    ) : (
-                        <OrderSummary
-                            ingredients={props.ings}
-                            purchaseCancelled={purchaseCancelHandler}
-                            purchaseContinued={purchaseContinueHandler}
-                            price={props.price}
-                        />
-                    )
+                    <OrderSummary
+                        ingredients={props.ings}
+                        purchaseCancelled={purchaseCancelHandler}
+                        purchaseContinued={purchaseContinueHandler}
+                        price={props.price}
+                    />
                 ) : null}
             </Modal>
-            {error && <p>{error.message}</p>}
-            {props.ings && (
+            {props.error && <p>Ingredients can't be loaded!</p>}
+            {props.ings ? (
                 <>
                     <Burger ingredients={props.ings} />
                     <BuildControls
@@ -85,6 +81,8 @@ const BurgerBuilder = (props) => {
                         price={props.price}
                     />
                 </>
+            ) : (
+                <Spinner />
             )}
         </>
     );
@@ -92,25 +90,21 @@ const BurgerBuilder = (props) => {
 
 const mapStateToProps = (state) => {
     return {
-        ings: state.ingredients,
-        price: state.totalPrice,
+        ings: state.burgerBuilder.ingredients,
+        price: state.burgerBuilder.totalPrice,
+        error: state.burgerBuilder.error,
     };
 };
 
 const mapDispatchToProps = (dispatch) => {
     return {
         onIngredientAdded: (ingName) =>
-            dispatch({
-                type: actionTypes.ADD_INGREDIENT,
-                ingredientName: ingName,
-                ingredientPrice: INGREDIENT_PRICES[ingName],
-            }),
+            dispatch(burgerBuilderActions.addIngredient(ingName)),
         onIngredientRemoved: (ingName) =>
-            dispatch({
-                type: actionTypes.REMOVE_INGREDIENT,
-                ingredientName: ingName,
-                ingredientPrice: INGREDIENT_PRICES[ingName],
-            }),
+            dispatch(burgerBuilderActions.removeIngredient(ingName)),
+        onInitIngredients: () =>
+            dispatch(burgerBuilderActions.initIngredients()),
+        onInitPurchase: () => dispatch(burgerBuilderActions.purchaseInit()),
     };
 };
 

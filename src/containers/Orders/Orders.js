@@ -1,37 +1,22 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 
 import Order from "../../components/Order/Order";
-import axios from "../../axios-order";
+import Spinner from "../../components/UI/Spinner/Spinner";
+import { connect } from "react-redux";
+import * as actions from "../../store/actions/index";
 
-const Orders = () => {
-    const [orders, setOrders] = useState([]);
-    const [loading, setLoading] = useState(true);
+const Orders = (props) => {
     useEffect(() => {
-        axios
-            .get("/orders.json")
-            .then((response) => {
-                console.log(response.data);
-                const fetchedOrders = [];
-                for (let key in response.data) {
-                    fetchedOrders.push({
-                        ...response.data[key],
-                        id: key,
-                    });
-                }
-                setOrders(fetchedOrders);
-                setLoading(false);
-            })
-            .catch((error) => {
-                console.log(error);
-                setLoading(false);
-            });
+        if (!props.orders || props.orders.length === 0 || props.loading) {
+            props.onFetchOrders();
+        }
     }, []);
     return (
         <div>
-            {loading ? (
-                <p>Loading...</p>
+            {props.loading ? (
+                <Spinner />
             ) : (
-                orders.map((order) => (
+                props.orders.map((order) => (
                     <Order
                         key={order.id}
                         ingredients={order.ingredients}
@@ -43,4 +28,17 @@ const Orders = () => {
     );
 };
 
-export default Orders;
+const mapStateToProps = (state) => {
+    return {
+        orders: state.order.orders,
+        loading: state.order.loading,
+    };
+};
+
+const mapDispatchToProps = (dispatch) => {
+    return {
+        onFetchOrders: () => dispatch(actions.fetchOrders()),
+    };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Orders);
