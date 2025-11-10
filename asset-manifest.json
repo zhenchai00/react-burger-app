@@ -1,9 +1,9 @@
 {
   "files": {
     "main.css": "/react-burger-app/static/css/main.27c8e426.css",
-    "main.js": "/react-burger-app/static/js/main.49b38bc5.js",
+    "main.js": "/react-burger-app/static/js/main.e50151bd.js",
     "static/css/908.0ad03672.chunk.css": "/react-burger-app/static/css/908.0ad03672.chunk.css",
-    "static/js/908.ee34a9b9.chunk.js": "/react-burger-app/static/js/908.ee34a9b9.chunk.js",
+    "static/js/908.b3a16fb3.chunk.js": "/react-burger-app/static/js/908.b3a16fb3.chunk.js",
     "static/css/997.f6471872.chunk.css": "/react-burger-app/static/css/997.f6471872.chunk.css",
     "static/js/997.4debeee9.chunk.js": "/react-burger-app/static/js/997.4debeee9.chunk.js",
     "static/css/744.8c2ff7a4.chunk.css": "/react-burger-app/static/css/744.8c2ff7a4.chunk.css",
@@ -12,9 +12,9 @@
     "static/media/burger-logo.png": "/react-burger-app/static/media/burger-logo.ec69c7f65e6d7565759f.png",
     "index.html": "/react-burger-app/index.html",
     "main.27c8e426.css.map": "/react-burger-app/static/css/main.27c8e426.css.map",
-    "main.49b38bc5.js.map": "/react-burger-app/static/js/main.49b38bc5.js.map",
+    "main.e50151bd.js.map": "/react-burger-app/static/js/main.e50151bd.js.map",
     "908.0ad03672.chunk.css.map": "/react-burger-app/static/css/908.0ad03672.chunk.css.map",
-    "908.ee34a9b9.chunk.js.map": "/react-burger-app/static/js/908.ee34a9b9.chunk.js.map",
+    "908.b3a16fb3.chunk.js.map": "/react-burger-app/static/js/908.b3a16fb3.chunk.js.map",
     "997.f6471872.chunk.css.map": "/react-burger-app/static/css/997.f6471872.chunk.css.map",
     "997.4debeee9.chunk.js.map": "/react-burger-app/static/js/997.4debeee9.chunk.js.map",
     "744.8c2ff7a4.chunk.css.map": "/react-burger-app/static/css/744.8c2ff7a4.chunk.css.map",
@@ -23,6 +23,6 @@
   },
   "entrypoints": [
     "static/css/main.27c8e426.css",
-    "static/js/main.49b38bc5.js"
+    "static/js/main.e50151bd.js"
   ]
 }
