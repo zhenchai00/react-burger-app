@@ -22,7 +22,7 @@ const Checkout = (props) => {
         }
         props.onInitPurchase();
 
-    }, [props]);
+    }, [props, navigate]);
 
     return (
         <div>

@@ -1,10 +1,10 @@
 import * as actionTypes from "../actions/actionTypes";
-import { updateObject } from "../utils";
 
 const initialState = {
     ingredients: null,
     totalPrice: 4,
     error: false,
+    building: false,
 };
 
 const INGREDIENT_PRICES = {
@@ -27,9 +27,9 @@ const reducer = (state = initialState, action) => {
                 },
                 totalPrice:
                     state.totalPrice + INGREDIENT_PRICES[action.ingredientName],
+                building: true,
             };
         case actionTypes.REMOVE_INGREDIENT:
-            console.log('REMOVE_INGREDIENT reducer called');
             const oldCount = state.ingredients[action.ingredientName] || 0;
             if (oldCount <= 0) {
                 return state;
@@ -43,6 +43,7 @@ const reducer = (state = initialState, action) => {
                 },
                 totalPrice:
                     state.totalPrice - INGREDIENT_PRICES[action.ingredientName],
+                building: true,
             };
         case actionTypes.SET_INGREDIENTS:
             return {
@@ -55,6 +56,7 @@ const reducer = (state = initialState, action) => {
                 },
                 totalPrice: 4,
                 error: false,
+                building: false,
             };
         case actionTypes.FETCH_INGREDIENTS_FAILED:
             return {

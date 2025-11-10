@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { use, useState } from "react";
 import Button from "../../../components/UI/Button/Button";
 import Spinner from "../../../components/UI/Spinner/Spinner";
 import Input from "../../../components/UI/Input/Input";
@@ -98,8 +98,9 @@ const ContactData = (props) => {
             ingredients: props.ings,
             price: props.price,
             orderData: data,
+            userId: props.userId,
         };
-        props.onOrderBurger(order);
+        props.onOrderBurger(order, props.token);
     };
 
     const checkValidity = (value, rules = {}) => {
@@ -190,12 +191,14 @@ const mapStateToProps = (state) => {
         ings: state.burgerBuilder.ingredients,
         price: state.burgerBuilder.totalPrice,
         loading: state.order.loading,
+        token: state.auth.token,
+        userId: state.auth.userId,
     };
 }
 
-const mapDispatchToProps = dispatch => {
+const mapDispatchToProps = (dispatch) => {
     return {
-        onOrderBurger: (orderData) => dispatch(actions.purchaseBurger(orderData))
+        onOrderBurger: (orderData, token) => dispatch(actions.purchaseBurger(orderData, token))
     };
 }
 

@@ -3,6 +3,8 @@ import React from 'react';
 import Burger from '../../../components/Burger/Burger';
 import Button from '../../../components/UI/Button/Button';
 
+import './CheckoutSummary.css';
+
 const CheckoutSummary = (props) => {
     return (
         <div className='CheckoutSummary'>

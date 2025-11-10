@@ -8,11 +8,13 @@ import { Provider } from 'react-redux';
 import { configureStore } from '@reduxjs/toolkit';
 import burgerBuilderReducer from './store/reducers/burgerBuilder';
 import orderReducer from './store/reducers/order';
+import authReducer from './store/reducers/auth';
 
 const store = configureStore({
   reducer: {
     burgerBuilder: burgerBuilderReducer,
-    order: orderReducer
+    order: orderReducer,
+    auth: authReducer
   },
   middleware: (getDefaultMiddleware) => getDefaultMiddleware({ serializableCheck: true }),
 });
