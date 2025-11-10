@@ -70,6 +70,10 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/d
 This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
 
 
+### Deployment 
+This project is deployed on GitHub Pages and can follow the guide from [here](https://create-react-app.dev/docs/deployment/#github-pages) and [here](https://github.com/gitname/react-gh-pages).
+
+
 ### Sample Screenshots
 ![burger-app-1](/resources/demo1.png)
 ![burger-app-2](/resources/demo2.png)
