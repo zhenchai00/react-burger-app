@@ -27,7 +27,7 @@ const App = (props) => {
                 {/* parent route must allow deeper matching for nested routes */}
                 {props.isAuthenticated ? (
                     <Suspense fallback={<Spinner />}>
-                        <Routes>
+                        <Routes basepath="/react-burger-app/">
                             <Route path="/checkout/*" Component={Checkout} />
                             <Route path="/orders" Component={Orders} />
                             <Route path="/logout" Component={Logout} />
@@ -38,7 +38,7 @@ const App = (props) => {
                     </Suspense>
                 ) : (
                     <Suspense fallback={<Spinner />}>
-                        <Routes>
+                        <Routes basepath="/react-burger-app/">
                             <Route path="/auth" Component={Auth} />
                             <Route path="/" Component={BurgerBuilder} />
                         </Routes>

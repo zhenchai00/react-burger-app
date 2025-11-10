@@ -33,7 +33,7 @@ const Checkout = (props) => {
                         checkoutCancelled={checkoutCancelledHandler}
                         checkoutContinued={checkoutContinuedHandler}
                     />
-                    <Routes>
+                    <Routes basepath="/react-burger-app/">
                         {/* nested routes should use relative paths when the parent route includes `*` */}
                         <Route
                             path="contact-data"
